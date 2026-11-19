@@ -134,6 +134,7 @@ plt.title("CO2 range at Mauna Loa (1959-2016)")
 plt.savefig("results/annual_co2_range.png", dpi=300, bbox_inches="tight")
 #plt.savefig() keeps graph as a file
 #DPI is dots per inch
+#bbox is Bounding Box (parameter) which help to manage area of the graph when we keep it as photo 
 plt.show()
 
 #Second Graph - Regression residuals over the time
