@@ -1,0 +1,224 @@
+% ============================================================================
+%  Computer Science for Physics and Chemistry -- GROUP RESEARCH PAPER TEMPLATE
+%  ONE single file. Write directly into it. Replace the guidance text in each
+%  section with your own writing. Compiles on Overleaf as-is.
+%  >>> DELETE the grey "Guidance:" lines and the Instructions box before you
+%      submit the final version. <<<
+% ============================================================================
+
+\documentclass[sigconf,nonacm]{acmart}
+% 'nonacm' removes ACM copyright/CCS boilerplate. If acmart is unavailable, see
+% the fallback note at the end of this file.
+
+\settopmatter{printacmref=false}
+\renewcommand\footnotetextcopyrightpermission[1]{}
+\pagestyle{plain}
+
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+
+% a grey "Guidance" style for the inline hints (delete these before submitting)
+\definecolor{guide}{RGB}{110,120,130}
+\newcommand{\guidance}[1]{\par{\small\color{guide}\textit{Guidance: #1}}\par\medskip}
+
+\begin{document}
+
+% ===========================================================================
+%  INSTRUCTIONS BOX  (visible in the PDF; DELETE before final submission)
+% ===========================================================================
+\begin{tcolorbox}[colback=yellow!8,colframe=orange!60!black,title=\textbf{READ FIRST --- then delete this box before submitting}]
+\small
+\textbf{What this is.} A short scientific paper (4--6 pages, two columns)
+reporting a small study \emph{you} carry out: pick a problem, find a public
+dataset (\textbf{UCI} or \textbf{Kaggle}), analyse it in Python with the course
+methods, get real numbers and plots, and discuss them.
+
+\smallskip
+\textbf{Three hard requirements --- miss any one and the paper is NOT accepted:}
+(1)~a \textbf{GitHub repository} link; (2)~the \textbf{dataset} inside the repo
+\emph{or} a link in \textbf{both} the repo README \textbf{and} this paper;
+(3)~a \textbf{detailed AI-usage disclosure}.
+
+\smallskip
+\textbf{Grading (out of 20).}
+\textit{Structure \& presentation} --- 4
+(sections present + correct two-column formatting + clear writing).
+\textit{Paper content} --- 9
+(problem \& cited data 1.5; methods 2.5; results 2.5; discussion 2.0;
+abstract \& conclusion 0.5).
+\textit{Source code \& reproducibility} --- 7
+(repo builds \& runs 2.5; reproduces the paper 2.0; data handling 1.0;
+code hygiene 1.0; AI disclosure 0.5).
+
+\smallskip
+The best papers are invited to the \textbf{poster session}, competing for a prize.
+\end{tcolorbox}
+
+% ---------------------------------------------------------------------------
+%  TITLE AND AUTHORS
+% ---------------------------------------------------------------------------
+\title{Your Paper Title: Short, Specific, Descriptive}
+
+\author{First Author}
+\affiliation{\institution{UFAZ}\country{Azerbaijan}}
+\email{name@example.com}
+
+\author{Second Author}
+\affiliation{\institution{UFAZ}\country{Azerbaijan}}
+\email{name@example.com}
+% Add or remove \author blocks to match your group size.
+
+\begin{abstract}
+\guidance{The abstract is one self-contained paragraph of about 150 words that
+a reader can understand without seeing the rest of the paper. In one or two
+sentences each, state: the problem or question you studied; the dataset you
+used; what you did to it (your method); your single most important result, as a
+concrete finding or number; and one sentence on what it means. Do not put
+citations, figures, or equations in the abstract. Write it last, once the paper
+is finished.}
+Write your abstract here.
+\end{abstract}
+
+\maketitle
+
+% ---------------------------------------------------------------------------
+\section{Introduction}
+\guidance{Open by saying what problem or question you are tackling and why it
+matters to someone. Give the reader just enough background to care, but do not
+write a long literature review. Briefly say what data you will use (one line;
+the full description goes in the Data section). State clearly, in one or two
+sentences, what you set out to do, beginning with ``In this work, we\ldots''.
+If you like, end with a one-sentence road map of the paper.}
+Write the introduction here.
+
+% ---------------------------------------------------------------------------
+\section{Data}
+\guidance{Name your dataset and the public source it comes from (UCI or Kaggle)
+and cite it with \texttt{\textbackslash cite\{dataset\}}~\cite{dataset}. Give
+the link, and remember the \emph{same} link must appear in your repository
+README. Describe the dataset concretely: how many samples (rows), what the
+variables/columns are, and their units. Explain any cleaning or preprocessing
+you did and why (removing missing values, filtering, scaling). Mention anything
+unusual such as outliers, noise, or imbalance.}
+Describe your dataset, its source, size, and any preprocessing here.
+
+% ---------------------------------------------------------------------------
+\section{Methods}
+\guidance{Explain your computational approach clearly enough that another
+student could reproduce it. State which course methods you used (for example
+distribution fitting, Q--Q plots and the Shapiro--Wilk test, a p-value test,
+correlation, curve fitting, or Monte~Carlo) and why each was appropriate for
+your question. Name your tools: Python with NumPy, SciPy, and Matplotlib, run
+inside your conda environment, and note that the exact versions are pinned in
+\texttt{environment.yml}. If you fit or test something, say exactly what you
+compared and which function you called. Do not paste large blocks of code here;
+the code lives in your repository.}
+Describe your methods and tools here.
+
+% ---------------------------------------------------------------------------
+\section{Results}
+\guidance{Report what you actually found, using real numbers and plots produced
+by your own code. Introduce each figure and table in the text and refer to it by
+number, for example ``Figure~\ref{fig:example} shows\ldots''. Every figure and
+table must have a caption that explains what it shows. Where it makes sense,
+report uncertainty: a value together with its error, or a p-value for a
+comparison. State the results plainly and honestly, including any that did not
+turn out as expected, and save the interpretation for the Discussion.}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{example-image}
+  % replace example-image with your own plot file
+  \caption{What the figure shows, in one sentence.}
+  \label{fig:example}
+\end{figure}
+
+\begin{table}[t]
+  \centering
+  \caption{What the table reports.}
+  \label{tab:example}
+  \begin{tabular}{@{}lr@{}}
+    \toprule
+    Quantity & Value \\
+    \midrule
+    mean     & 0.00 \\
+    p-value  & 0.00 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Write your results here, referring to Figure~\ref{fig:example} and
+Table~\ref{tab:example}.
+
+% ---------------------------------------------------------------------------
+\section{Discussion}
+\guidance{This is where you interpret your results, and it carries real marks,
+so do not skip it. Answer the question you raised in the Introduction: what do
+the numbers actually mean? Be honest about the limitations of your study, such
+as a small or noisy sample, or assumptions that may not hold (for instance, did
+you assume the data was normal, and was it really?). Say what you would do next
+with more time or more data. Remember that ``it worked'' is not a discussion:
+explain \emph{why} your results are what they are.}
+Interpret your results, state limitations, and suggest next steps here.
+
+% ---------------------------------------------------------------------------
+\section{Conclusion}
+\guidance{Write two or three sentences only. Remind the reader what you set out
+to do, and state the single most important thing you found. Do not introduce any
+new results or ideas here.}
+Write a short conclusion here.
+
+% ---------------------------------------------------------------------------
+\section{Reproducibility}
+\guidance{This section is required: with no working repository the paper is not
+accepted. Give the full link to your GitHub repository. State that the
+repository contains your code, the \texttt{environment.yml}, a README with run
+instructions, and the data (or the data link). Give the one or two commands that
+reproduce your results, for example: \texttt{conda env create -f
+environment.yml}, then \texttt{conda activate <env>}, then \texttt{python
+main.py}.}
+\textbf{Repository:} \url{https://github.com/USER/REPO}
+
+State what the repository contains and how to run it here.
+
+% ---------------------------------------------------------------------------
+\section{AI Usage Disclosure}
+\guidance{This section is required and must be detailed. List every AI tool you
+used (for example ChatGPT, Claude, GitHub Copilot) and state exactly what you
+used each one for: writing or editing text, generating or debugging code,
+analysing data, or making figures. Be specific about which parts of the work
+each tool touched. If you used no AI tools at all, say so explicitly. Vague or
+missing disclosure is treated as an academic-integrity issue.}
+Disclose, in detail, any AI tools you used and what for, or state that none were
+used.
+
+% ---------------------------------------------------------------------------
+%  REFERENCES
+% ---------------------------------------------------------------------------
+\begin{thebibliography}{9}
+
+\bibitem{dataset}
+Dataset Provider. Year.
+\textit{Dataset Name}.
+UCI Machine Learning Repository / Kaggle.
+\url{https://dataset-link}
+
+\bibitem{scipy}
+Pauli Virtanen et al. 2020.
+SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python.
+\textit{Nature Methods} 17, 261--272.
+
+\end{thebibliography}
+
+\end{document}
+
+% ============================================================================
+%  FALLBACK IF 'acmart' IS NOT AVAILABLE
+%  Overleaf has acmart built in (New Project -> Templates -> "ACM Conference").
+%  If you ever need a fallback, replace the \documentclass line with
+%     \documentclass[twocolumn,10pt]{article}
+%  and delete the \affiliation, \email, and \settopmatter lines. All section
+%  content and structure stay the same.
+% ============================================================================
