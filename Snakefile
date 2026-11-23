@@ -2,7 +2,8 @@ rule all: # Define the final output files needed for the project
     input:
         "results/annual_co2_range.png",
         "results/regression_residuals.png",
-        "results/annual_vs_seasonal_range.png"
+        "results/annual_vs_seasonal_range.png",
+        "results/data_quality_summary.txt"
 
 
 rule generate_graphs: # Run the Python analysis to generate the CO2 graphs
@@ -15,3 +16,13 @@ rule generate_graphs: # Run the Python analysis to generate the CO2 graphs
         "results/annual_vs_seasonal_range.png"
     shell:  # Run the analysis without opening graph windows
         "MPLBACKEND=Agg python src/explore_data.py"
+
+
+rule validate_dataset:
+    input:
+        "data/archive.csv",
+        "src/validate_data.py"
+    output:
+        "results/data_quality_summary.txt"
+    shell:
+        "python src/validate_data.py"

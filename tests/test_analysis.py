@@ -1,5 +1,5 @@
 import pandas as pd # Import pandas to create small datasets for testing
-from src.analysis import calculate_annual_range # Import the function we want to test
+from src.analysis import calculate_annual_range, calculate_complete_year_ranges # Import the function we want to test
 
 def test_annual_range():
     # Create a small dataset
@@ -74,3 +74,75 @@ def test_unsorted_years():
     # Check the difference between maximum and minimum CO2
     assert result.loc[2000] == 8
     assert result.loc[2001] == 5
+
+
+def test_incomplete_year_behavior():
+    # Check how the function handles a year with only two measurements
+    data = pd.DataFrame({
+        "Year": [2000, 2000],
+        "Carbon Dioxide (ppm)": [370, 375]
+    })
+
+    result = calculate_annual_range(data)
+
+    # The current function calculates a range even for an incomplete year
+    assert result.loc[2000] == 5
+
+
+    
+def test_complete_year_filter():
+    # Create one complete year and one incomplete year
+    data = pd.DataFrame({
+        "Year": [2000] * 12 + [2001] * 2,
+        "Month": list(range(1, 13)) + [1, 2],
+        "Carbon Dioxide (ppm)": [
+            370, 371, 372, 373, 374, 375,
+            376, 377, 378, 379, 380, 381,
+            390, 395
+        ]
+    })
+
+    result = calculate_complete_year_ranges(data)
+
+    # Year 2000 has 12 months, so its range is 11 ppm
+    assert result.loc[2000] == 11
+
+    # Year 2001 has only 2 months and must be excluded
+    assert 2001 not in result.index
+
+
+
+def test_duplicate_months():
+    # A year with repeated months should not be treated as complete
+    data = pd.DataFrame({
+        "Year": [2000] * 12,
+        "Month": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 11],
+        "Carbon Dioxide (ppm)": [
+            370, 371, 372, 373, 374, 375,
+            376, 377, 378, 379, 380, 381
+        ]
+    })
+
+    result = calculate_complete_year_ranges(data)
+
+    # Year 2000 must be excluded because December is missing
+    assert 2000 not in result.index
+
+
+
+
+def test_invalid_month_values():
+    # Check if a year with invalid month numbers is excluded
+    data = pd.DataFrame({
+        "Year": [2000] * 12,
+        "Month": list(range(2, 14)),
+        "Carbon Dioxide (ppm)": [
+            370, 371, 372, 373, 374, 375,
+            376, 377, 378, 379, 380, 381
+        ]
+    })
+
+    result = calculate_complete_year_ranges(data)
+
+    # Month 13 is invalid, so year 2000 must be excluded
+    assert 2000 not in result.index

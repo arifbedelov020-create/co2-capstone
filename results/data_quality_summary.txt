@@ -1,0 +1,14 @@
+CO2 Dataset Quality Summary
+
+Dataset: Mauna Loa atmospheric CO2
+Source: Kaggle (UC San Diego)
+Total rows: 720
+Total columns: 7
+Missing CO2 measurements: 17
+Duplicate Year-Month rows: 0
+Invalid month rows: 0
+Complete years: 57
+Incomplete years: [1958, 1964, 2017]
+
+Main regression uses complete years only.
+The year 2017 is excluded from the study period.
